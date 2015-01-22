@@ -5,20 +5,41 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
         tagName: 'div',
         value: widget.property(),
         synchronized: widget.property({ type: 'boolean', bindable: false }),
-        //allowEmpty: widget.property({ type: 'boolean', bindable: false }),
         autoComplete: widget.property({ type: 'boolean', bindable: false, defaultValue: true }),
         searchCriteria: widget.property({
             type: 'enum',
             values: {
-                'startWith': 'start with',
-                'endWith': 'end with',
-                'contain': 'contain',
-                'equal': 'equal'
+                'startWith': 'starts with',
+                'endWith': 'ends with',
+                'contain': 'contains',
+                'equal': 'equals'
             },
             defaultValue: '',
             bindable: false
         }),
         placeholder: widget.property({ type: 'string', bindable: false }),
+        template: widget.property({
+            type: 'template',
+            templates: [
+                {
+                    name: 'Text only',
+                    template: '<li role="option" val={{value}}>\
+                                            {{List}}\
+                              </li>'
+                },
+                {
+                    name: 'Image and text',
+                    template: '<li role="option" val={{value}}>\
+                                            <p style="text-align: right;">\
+                                            <img  src="{{image}}" />\
+                                            {{List}}\
+                                            </p>\
+                              </li>'
+                }
+
+            ],
+            datasourceProperty: 'items'
+        }),
         items: widget.property({
             type: 'datasource',
             attributes: [{
@@ -28,83 +49,146 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
             }],
             pageSize: 40
         }),
-        template: widget.property({
-            type: 'template',
-            templates: [
-                {
-                    name: '[Text]',
-                    template: '<li role="option" val={{value}}>\
-                                            {{text}}\
-                              </li>'
-                },
-                {
-                    name: '[Image] [Text]',
-                    template: '<li role="option" val={{value}}>\
-                                            <p style="text-align: right;">\
-                                            <img  src="{{image}}" />\
-                                            {{text}}\
-                                            </p>\
-                              </li>'
-                }
-
-            ],
-            datasourceProperty: 'items'
-        }),
         render: function() { },
+        _synchronizeDupDsPosition: function(callBackOptions) {
+            var collection = this.getPart('list').collection();
+            var boundDatasource = this.items.boundDatasource();
+            if(! collection || ! boundDatasource)
+                return;
+
+            if(collection.getPosition() === boundDatasource.datasource.getPosition()) {
+                if(callBackOptions.onSuccess) callBackOptions.onSuccess.call(this);
+                return;
+            }
+
+            var options = {
+                onSuccess: function(e) {
+                    if(callBackOptions.onSuccess) callBackOptions.onSuccess.call(this);
+                }.bind(this),
+                onError: function(e) {
+                    if(callBackOptions.onError) callBackOptions.onError.call(this);
+                }.bind(this)
+            };
+
+            collection.select(boundDatasource.datasource.getPosition(), options);
+        },
+        _syncCollectionChangeHandler: function() {
+            var boundDatasource = this.items.boundDatasource();
+            var collection = this.getPart('list').collection();
+            var that = this;
+
+            function _pauseOrResume(bool) {
+                if(that.synchronized()) {
+                    that._syncDupDsElementChangeSubscriber[bool ? 'pause' : 'resume']();
+                    that._syncBoundDsElementChangeSubscriber[bool ? 'pause' : 'resume']();
+                } else {
+                    that._dupDsElementChangeSetBindSubscriber[bool ? 'pause' : 'resume']();
+                    if(that._boundValueDsElementChangeSubscriber)
+                        that._boundValueDsElementChangeSubscriber[bool ? 'pause' : 'resume']();
+                }
+            }
+            _pauseOrResume(true);
+            var options = {
+                destinationDataSource: collection._private.id,
+                onSuccess: function(e) {
+                    var opt = {};
+                    opt.onSuccess = opt.onError = function(e) { _pauseOrResume(false); };
+                    if(that.synchronized()) {
+                        that._synchronizeDupDsPosition(opt);
+                    } else {
+                        var boundValueDatasource = this.value.boundDatasource();
+                        if(boundValueDatasource && boundValueDatasource.datasource) {
+                            var value = boundValueDatasource.datasource.getAttributeValue(boundValueDatasource.attribute);
+                            that._selectValueCombobox(value, opt);
+                        } else {
+                            _pauseOrResume(false);
+                        }
+                    }
+                }.bind(this)
+            };
+            boundDatasource.datasource.filterQuery('', options);
+        },
         init: function() {
             this._initInput();
             this._initButton();
             this._initList();
             this._changeCssClassName();
 
-            var bound = this.value.boundDatasource();
             var boundDatasource = this.items.boundDatasource();
+            var boundValueDatasource = this.value.boundDatasource();
             var collection = this.getPart('list').collection();
+            var mapping = this._getItemsMapping();
+            var that = this;
 
-            // synchronize source and duplicated datasource
-            if(this.synchronized() && collection && boundDatasource) {
-                this._synchronize2DS(collection, boundDatasource.datasource);
-            }
-
-            // update selected after bind value change
-            if(! this.synchronized() && bound && bound.datasource && boundDatasource) {
-                this._boundDsElementChangeSubscriber = bound.datasource.subscribe('currentElementChange', function(e) {
-                    this._setSelectCbxFromBoundValue();
+            // datasource events
+            if(collection) {
+                // synchronize if collection change
+                this._syncBoundDsCollectionChangeSubscriber = boundDatasource.datasource.subscribe('collectionChange', function(e) { 
+                    this._syncCollectionChangeHandler();
                 }.bind(this));
+
+                this._dupDsElementChangeSubscriber = collection.subscribe('currentElementChange', function(e) {
+                    var value = collection.getAttributeValue(mapping.value);
+                    // update the display
+                    that.getPart('input').value(collection.getAttributeValue(mapping.display));
+                    that.fire('changed');
+                }.bind(this));
+
+                this._syncDupDsElementChangeSubscriber = collection.subscribe('currentElementChange', function(e) {
+                    // synchronize with origin datasource
+                    if(this.synchronized()) {
+                        if(collection.length &&  boundDatasource.datasource.length && collection.getPosition() != boundDatasource.datasource.getPosition()) {
+                            that._syncBoundDsElementChangeSubscriber.pause();
+                            var options = {};
+                            options.onSuccess = options.onError = function(e) { that._syncBoundDsElementChangeSubscriber.resume(); };
+                            boundDatasource.datasource.select(collection.getPosition(), options);
+                        }
+                    }
+                }.bind(this));
+
+                this._dupDsElementChangeSetBindSubscriber = collection.subscribe('currentElementChange', function(e) {
+                    if(! this.synchronized()) {
+                        var value = collection.getAttributeValue(mapping.value);
+                        this._setBindValue(value);
+                    }
+                }.bind(this));
+
+                // update selected after bind value change
+                if(! this.synchronized() && boundValueDatasource && boundValueDatasource.datasource && boundDatasource) {
+                    this._boundValueDsElementChangeSubscriber = boundValueDatasource.datasource.subscribe('currentElementChange', function(e) {
+                        var value = boundValueDatasource.datasource.getAttributeValue(boundValueDatasource.attribute);
+                        this._dupDsElementChangeSetBindSubscriber.pause();
+                        var options = {};
+                        options.onSuccess = options.onError = function(e) { this._dupDsElementChangeSetBindSubscriber.resume(); };
+                        this._selectValueCombobox(value, options);
+                    }.bind(this));
+                }
+
+                this._syncBoundDsElementChangeSubscriber = boundDatasource.datasource.subscribe('currentElementChange', function(e) {
+                    if(that.synchronized()) {
+                        if(boundDatasource.datasource.length &&  collection.length && boundDatasource.datasource.getPosition() != collection.getPosition()) {
+                            that._syncDupDsElementChangeSubscriber.pause();
+                            var options = {};
+                            options.onSuccess = options.onError = function(e) { that._syncDupDsElementChangeSubscriber.resume(); };
+                            collection.select(boundDatasource.datasource.getPosition(), options);
+                        }
+                    }
+                });
+
             }
         },
         _changeCssClassName: function() {
-            $(this.node).removeClass('waf-combobox').addClass('waf-combobox2');
+            this.addClass('waf-combobox2');
 
            ['input', 'button', 'list'].forEach(function(name) {
                 var widget = this.getPart(name);
                 if(widget) {
-                    $(widget.node).addClass('waf-combobox2-part-' + name);//.removeClass('waf-combobox-part-' + name);
+                    $(widget.node).addClass('waf-combobox2-part-' + name);
                 }
             }.bind(this));
         },
-        _synchronize2DS: function(ds1, ds2) {
-            var arrDs = [ds1, ds2];
-            arrDs.forEach(function(currentDs, i) {
-                this['_sync' + currentDs.datasourceName + 'Subscriber'] = currentDs.subscribe('currentElementChange', function(e) {
-                        var secondDs = arrDs[(i+1)%2];
-                        if(! currentDs.length || ! secondDs.length || currentDs.getKey() === secondDs.getKey())
-                            return;
-                        this['_sync' + secondDs.datasourceName + 'Subscriber'].pause();
-                        var options = {
-                            onSuccess: function() {
-                                this['_sync' + secondDs.datasourceName + 'Subscriber'].resume();
-                            }.bind(this),
-                            onError: function() {
-                                this['_sync' + secondDs.datasourceName + 'Subscriber'].resume();
-                            }.bind(this)
-                        };
-                        secondDs.selectByKey(currentDs.ID,  options);
-                }.bind(this));
-            }.bind(this));
-        },
         selectElement: function(value) {
-            this._selectValueCombobox(value, function() { this._setBindValue(); }.bind(this));
+            this._selectValueCombobox(value);
             this._closeList();
         },
         _getItemsMapping: function() {
@@ -154,12 +238,20 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
                 }
             }
 
-            this._pauseDupDs(true);
-            collection.query(queryString, {
+            this._dupDsElementChangeSubscriber.pause();
+            this._dupDsElementChangeSetBindSubscriber.pause();
+            this._syncDupDsElementChangeSubscriber.pause();
+            boundDatasource.datasource.filterQuery(queryString, {
                 onSuccess: function(e) {
                     this._openList();
-                    this._pauseDupDs(false);
+                    this._dupDsElementChangeSubscriber.resume();
+                    this._dupDsElementChangeSetBindSubscriber.resume();
+                    this._syncDupDsElementChangeSubscriber.resume();
                 }.bind(this),
+                onError: function(e) {
+                    console.error(e);
+                },
+                destinationDataSource: collection._private.id,
                 params: [ value ]
             });
         },
@@ -191,36 +283,17 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
         },
         _initList: function() {
             var list = this.getPart('list');
-
-            function _initListDataSource() {
-                var bound = this.value.boundDatasource();
-                var boundDatasource = this.items.boundDatasource();
-
-                if(boundDatasource) {
-                    var duplicateDs = this._duplicateDataSource(boundDatasource);
-                    var mapping = this._getItemsMapping();
-                    list.collection(duplicateDs);
-
-                    this._dupDsElementChangeSubscriber = duplicateDs.subscribe('currentElementChange', function() {
-                        var value = duplicateDs.getAttributeValue(mapping.value);
-                        this.selectElement(value);
-                    }.bind(this));
-
-                    this._dupDsCollectionChangeSubscriber = duplicateDs.subscribe('collectionChange', function() {
-                        if(! this.synchronized() && bound) {
-                            this._setSelectCbxFromBoundValue();
-                        }
-                    }.bind(this));
-                } else {
-                    list.collection(null);
-                }
-            };
-
             var bound = this.value.boundDatasource();
+            var boundDatasource = this.items.boundDatasource();
 
             // at execution, bind datasource to list
             if(this.items()) {
-                _initListDataSource.call(this);
+                if(boundDatasource) {
+                    var duplicateDs = this._duplicateDataSource(boundDatasource);
+                    list.collection(duplicateDs);
+                } else {
+                    list.collection(null);
+                }
                 list.template(this.template());
                 if(this.items.mapping()) {
                     list.collection.setMapping(this.items.mapping());
@@ -231,12 +304,7 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
             $(document).on('click', function(e) {
                 if (this._isListOpen() && ! $(e.target).closest(this.node).length) {
                     this._closeList();
-                    // rest to the default value
-                    if(! this.synchronized() && bound && bound.datasource) {
-                        this._setSelectCbxFromBoundValue();
-                    } else {
-                        list.collection().query();
-                    }
+                    this._syncCollectionChangeHandler();
                 }
             }.bind(this));
 
@@ -247,74 +315,68 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
             }.bind(this));
         },
         // executed only in the change of the combobox selected value
-        _setBindValue: function() {
+        _setBindValue: function(value) {
             var bound = this.value.boundDatasource();
             var collection = this.getPart('list').collection();
             var mapping = this._getItemsMapping();
             if(this.synchronized() || ! bound) return;
 
-            this._boundDsElementChangeSubscriber.pause();
-
             var boundAttribute = bound.datasource.getAttribute(bound.attribute);
             if(boundAttribute.kind === 'relatedEntity') {
+                var oldValue = bound.datasource[bound.attribute].getKey();
+                if(oldValue === collection.getKey())
+                    return;
+                this._boundValueDsElementChangeSubscriber.pause();
                 bound.datasource[bound.attribute].set(collection);
+                this._boundValueDsElementChangeSubscriber.resume();
             } else {
-                bound.datasource.setAttributeValue(bound.attribute, collection.getAttributeValue(mapping.value));
+                var oldValue = bound.datasource.getAttributeValue(bound.attribute);
+                var newValue = collection.getAttributeValue(mapping.value);
+                if(oldValue === newValue)
+                    return;
+                this._boundValueDsElementChangeSubscriber.pause();
+                bound.datasource.setAttributeValue(bound.attribute, newValue);
+                this._boundValueDsElementChangeSubscriber.resume();
             }
-
-            this._boundDsElementChangeSubscriber.resume();
-        },
-        _pauseDupDs: function(bool) {
-            if(bool) {
-                this._dupDsElementChangeSubscriber.pause();
-                this._dupDsCollectionChangeSubscriber.pause();
-            } else {
-                this._dupDsElementChangeSubscriber.resume();
-                this._dupDsCollectionChangeSubscriber.resume();
-            }
-        },
-        // executed only when bind value change
-        _setSelectCbxFromBoundValue: function() {
-            var bound = this.value.boundDatasource();
-            if(! bound) return;
-            var value = bound.datasource.getAttributeValue(bound.attribute);
-            this._dupDsElementChangeSubscriber.pause();
-            this._selectValueCombobox(value, function() { this._dupDsElementChangeSubscriber.resume(); }.bind(this));
         },
         _closeList: function() {
-            this.getPart('list').hide();
+            if(this._isListOpen()) {
+                $(this.node).css('z-index', this._lastzIndex);
+                this.getPart('list').hide();
+                this.fire('close');
+            }
         },
         _openList: function() {
-            this.getPart('list').show();
+            if(! this._isListOpen()) {
+                this._lastzIndex = $(this.node).css('z-index');
+                $(this.node).css('z-index', 9999999);
+                this.getPart('list').show();
+                this.fire('open');
+            }
         },
         _isListOpen: function() {
             return $(this.getPart('list').node).is(':visible');
         },
-        _selectValueCombobox: function(value, callback) {
+        _selectValueCombobox: function(value, callBackOptions) {
             var collection = this.getListDatasource();
             var mapping = this._getItemsMapping();
+            var boundDatasource = this.items.boundDatasource();
+            var that = this;
             if(! collection) {
                 return;
             }
             var filterQuery = mapping.value + '="' + value + '"';
-            // re init the datsource 
-            // because toArray method work only on the current set
-            this._pauseDupDs(true);
-            var that = this;
-            collection.query('', {
-                onSuccess: function() {
-                    collection.toArray([], {
+            function _handleSelect() {
+                collection.toArray([], {
                         filterQuery: filterQuery,
                         retainPositions: true,
                         onSuccess: function(e) {
-                            console.info('> filterQuery : ', filterQuery);
-                            var position = e.result.length ? e.result[0].__POSITION : undefined;
+                            console.info('> filterQuery : ' + filterQuery + ' id : ' + that.id);
+                            var position = e.result.length ? e.result[0].__POSITION : -1;
                             var length = e.result.length;
                             var options = {
                                 onSuccess: function(evt) {
-                                    if(callback) callback.call(that);
                                     that.getPart('input').value(collection.getAttributeValue(mapping.display));
-
                                     if(length === 0)
                                         that.fire('notFound')
                                     else if(length > 1)
@@ -322,25 +384,35 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
                                     else
                                         that.fire('changed');
 
-                                    that._pauseDupDs(false);
+                                    if(callBackOptions && callBackOptions.onSuccess) callBackOptions.onSuccess.call(that);
                                 },
                                 onError: function(evt) {
-                                    if(callback) callback.call(that);
-                                    that._pauseDupDs(false);
+                                    if(callBackOptions && callBackOptions.onError) callBackOptions.onError.call(that);
                                 }
                             };
+                            if(position === -1) {
+                                options.onError = options.onSuccess;
+                            }
                             collection.select(position, options);
-
                         },
                         onError: function(e) {
-                            if(callback) callback.call(that);
+                            if(callBackOptions && callBackOptions.onError) callBackOptions.onError.call(that);
                         }
-                    });
-                },
-                onError: function(e) {
-                    that._pauseDupDs(false);
-                }
-            });
+                });
+            }
+
+            if(boundDatasource.datasource.length === collection.length) {
+                _handleSelect.call(this);
+            } else {
+                boundDatasource.datasource.filterQuery('', {
+                    destinationDataSource: collection._private.id,
+                    onSuccess: function(e) {
+                        _handleSelect.call(that);
+                    },
+                    onError: function(e) {
+                    }
+                });
+            }
         },
         getListDatasource: function() {
             return this.getPart('list').collection();
@@ -355,10 +427,6 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
                 'data-source-type': oldDs.datasource._private.sourceType,
                 'data-initialOrderBy': oldDs.datasource._private.initialOrderBy
             };
-            // generate new ds name
-            //var regx = new RegExp('^' + newDsParams.id + '(\\d+)$');
-            //newDsParams.id += Math.max.apply(Math, Object.keys(sources).map(function(elem) {
-            //            return parseInt((regx.exec(elem) || [])[1] || 0, 10); })) + 1;
 
             function _tmptoArray(arr, attributes, options) {
                 var arrRef = this._private._getFullSet();
@@ -385,14 +453,15 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
                 if(options.onSuccess) {
                     options.onSuccess({ result: arr });
                 }
-            };
+            }
 
             var newDs;
             switch(newDsParams['data-source-type']) {
                 case 'relatedEntities':
+                    newDsParams['binding'] = oldDs.datasource._private.dataClassName;
+                    newDsParams['data-source-type'] = 'dataClass';
                 case 'dataClass':
                     newDs = WAF.dataSource.create(newDsParams);
-                    if(newDs.query) newDs.query();
                     break;
                 case 'array':
                     window[newDsParams.id] = WAF.clone(oldDs.datasource._private.varRef);

@@ -7,23 +7,20 @@
     ComboBox.addLabel();
 
     ComboBox.customizeProperty('synchronized', {
-        title: 'Synchronized',
-        description: 'Synchronized with Choices'
+        title: 'Synchronize',
+        description: 'Synchronize with Choices'
     });
-    //ComboBox.customizeProperty('allowEmpty', {
-    //    title: 'Add Empty Entry'
-    //});
     ComboBox.customizeProperty('autoComplete', {
-        title: 'Auto Complete'
+        title: 'Autocomplete'
     });
     ComboBox.customizeProperty('searchCriteria', {
-        title: 'Search Criteria'
+        title: 'Filter'
     });
 
     ComboBox.doAfter('init', function() {
 
         // synchrinized
-        this.synchronized.onChange(function() {
+        function _synchronizedHandler() {
             if(this.synchronized()) {
                 this.value.hide();
                 this.value.old = this.value();
@@ -32,10 +29,12 @@
                 this.value.show();
                 this.value(this.value.old);
             }
-        }.bind(this));
+        }
+        this.synchronized.onChange(_synchronizedHandler.bind(this));
+        _synchronizedHandler.call(this);
 
         // autocomplete
-        this.autoComplete.onChange(function() {
+        function _autoCompleteHandler() {
             if(this.autoComplete()) {
                 this.searchCriteria.show();
                 this.searchCriteria(this.searchCriteria.old);
@@ -44,7 +43,9 @@
                 this.searchCriteria.old = this.searchCriteria();
                 this.searchCriteria(null);
             }
-        }.bind(this));
+        }
+        this.autoComplete.onChange(_autoCompleteHandler.bind(this));
+        _autoCompleteHandler.call(this);
 
         // hide custom widgets parts configuration
         _hideAttributesForm.call(this);
@@ -63,5 +64,35 @@
                 button[attribute].hide();
             });
         }
+        _resizeInput.call(this);
     });
+
+    // fixe the bug not supproted css calc webkit in studio
+    function _resizeInput() {
+        window.setTimeout(function() {
+            var input = this.getPart('input');
+            var button = this.getPart('button');
+            $(input.node).width($(this.node).innerWidth() - $(button.node).width());
+        }.bind(this), 0);
+    }
+    ComboBox.studioOnResize(_resizeInput);
+
+    // add events
+    ComboBox.addEvents([{
+        'name': 'notFound',
+        'description': 'Not Found',
+        'category': 'Property Events'
+    }, {
+        'name': 'doublonFound',
+        'description': 'Doublon Found',
+        'category': 'Property Events'
+    }, {
+         'name': 'open',
+        'description': 'List Opened',
+        'category': 'Property Events'
+    }, {
+         'name': 'close',
+        'description': 'List Closed',
+        'category': 'Property Events'
+    }]);
 });
