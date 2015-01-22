@@ -6,14 +6,14 @@
 
     ComboBox.addLabel();
 
-    ComboBox.customizeProperty('synchronized', {
+    ComboBox.customizeProperty('synchroize', {
         title: 'Synchronize',
         description: 'Synchronize with Choices'
     });
     ComboBox.customizeProperty('autoComplete', {
         title: 'Autocomplete'
     });
-    ComboBox.customizeProperty('searchCriteria', {
+    ComboBox.customizeProperty('filter', {
         title: 'Filter'
     });
 
@@ -21,7 +21,7 @@
 
         // synchrinized
         function _synchronizedHandler() {
-            if(this.synchronized()) {
+            if(this.synchroize()) {
                 this.value.hide();
                 this.value.old = this.value();
                 this.value(null);
@@ -30,18 +30,18 @@
                 this.value(this.value.old);
             }
         }
-        this.synchronized.onChange(_synchronizedHandler.bind(this));
+        this.synchroize.onChange(_synchronizedHandler.bind(this));
         _synchronizedHandler.call(this);
 
         // autocomplete
         function _autoCompleteHandler() {
             if(this.autoComplete()) {
-                this.searchCriteria.show();
-                this.searchCriteria(this.searchCriteria.old);
+                this.filter.show();
+                this.filter(this.filter.old);
             } else {
-                this.searchCriteria.hide();
-                this.searchCriteria.old = this.searchCriteria();
-                this.searchCriteria(null);
+                this.filter.hide();
+                this.filter.old = this.filter();
+                this.filter(null);
             }
         }
         this.autoComplete.onChange(_autoCompleteHandler.bind(this));

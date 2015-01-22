@@ -4,9 +4,9 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
     var ComboBox = widget.create('ComboBox', {
         tagName: 'div',
         value: widget.property(),
-        synchronized: widget.property({ type: 'boolean', bindable: false }),
+        synchroize: widget.property({ type: 'boolean', bindable: false }),
         autoComplete: widget.property({ type: 'boolean', bindable: false, defaultValue: true }),
-        searchCriteria: widget.property({
+        filter: widget.property({
             type: 'enum',
             values: {
                 'startWith': 'starts with',
@@ -78,7 +78,7 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
             var that = this;
 
             function _pauseOrResume(bool) {
-                if(that.synchronized()) {
+                if(that.synchroize()) {
                     that._syncDupDsElementChangeSubscriber[bool ? 'pause' : 'resume']();
                     that._syncBoundDsElementChangeSubscriber[bool ? 'pause' : 'resume']();
                 } else {
@@ -93,7 +93,7 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
                 onSuccess: function(e) {
                     var opt = {};
                     opt.onSuccess = opt.onError = function(e) { _pauseOrResume(false); };
-                    if(that.synchronized()) {
+                    if(that.synchroize()) {
                         that._synchronizeDupDsPosition(opt);
                     } else {
                         var boundValueDatasource = this.value.boundDatasource();
@@ -136,7 +136,7 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
 
                 this._syncDupDsElementChangeSubscriber = collection.subscribe('currentElementChange', function(e) {
                     // synchronize with origin datasource
-                    if(this.synchronized()) {
+                    if(this.synchroize()) {
                         if(collection.length &&  boundDatasource.datasource.length && collection.getPosition() != boundDatasource.datasource.getPosition()) {
                             that._syncBoundDsElementChangeSubscriber.pause();
                             var options = {};
@@ -147,14 +147,14 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
                 }.bind(this));
 
                 this._dupDsElementChangeSetBindSubscriber = collection.subscribe('currentElementChange', function(e) {
-                    if(! this.synchronized()) {
+                    if(! this.synchroize()) {
                         var value = collection.getAttributeValue(mapping.value);
                         this._setBindValue(value);
                     }
                 }.bind(this));
 
                 // update selected after bind value change
-                if(! this.synchronized() && boundValueDatasource && boundValueDatasource.datasource && boundDatasource) {
+                if(! this.synchroize() && boundValueDatasource && boundValueDatasource.datasource && boundDatasource) {
                     this._boundValueDsElementChangeSubscriber = boundValueDatasource.datasource.subscribe('currentElementChange', function(e) {
                         var value = boundValueDatasource.datasource.getAttributeValue(boundValueDatasource.attribute);
                         this._dupDsElementChangeSetBindSubscriber.pause();
@@ -165,7 +165,7 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
                 }
 
                 this._syncBoundDsElementChangeSubscriber = boundDatasource.datasource.subscribe('currentElementChange', function(e) {
-                    if(that.synchronized()) {
+                    if(that.synchroize()) {
                         if(boundDatasource.datasource.length &&  collection.length && boundDatasource.datasource.getPosition() != collection.getPosition()) {
                             that._syncDupDsElementChangeSubscriber.pause();
                             var options = {};
@@ -221,7 +221,7 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
             var queryString = '';
             if(value) {
                 queryString = searchAttribute + ' = :1';
-                switch(this.searchCriteria()) {
+                switch(this.filter()) {
                     case 'startWith':
                         value += '*';
                         break;
@@ -319,7 +319,7 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
             var bound = this.value.boundDatasource();
             var collection = this.getPart('list').collection();
             var mapping = this._getItemsMapping();
-            if(this.synchronized() || ! bound) return;
+            if(this.synchroize() || ! bound) return;
 
             var boundAttribute = bound.datasource.getAttribute(bound.attribute);
             if(boundAttribute.kind === 'relatedEntity') {
