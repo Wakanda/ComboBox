@@ -76,6 +76,8 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
             var boundDatasource = this.items.boundDatasource();
             var collection = this.getPart('list').collection();
             var that = this;
+            if(! collection)
+                return;
 
             function _pauseOrResume(bool) {
                 if(that.synchroize()) {
