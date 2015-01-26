@@ -1,39 +1,19 @@
-﻿.waf-theme.default .waf-combobox2 {
-  border: 1px solid #999;
-  border-radius: 4px;
-  background-image: -webkit-linear-gradient(bottom, #f3f2f4 0%, #f4f4f5 50%, #ffffff 50%);
-  background-image: linear-gradient(to top, #f3f2f4 0%, #f4f4f5 50%, #ffffff 50%);
-  box-shadow: inset 0 0 0 1px white, 1px 1px 3px rgba(0, 0, 0, 0.15);
-  text-shadow: #fff 1px 1px;
-  color: #1a1818;
-  -webkit-font-smoothing: antialiased;
-  font-smooth: always;
+﻿.waf-theme .waf-combobox2 {
+
 }
-.waf-theme.default .waf-combobox2 input {
-  appearance: none;
-  border: none;
-  border-right: 1px solid #999;
-  background-color: transparent;
-  padding-left: 10px;
-  height: 100%;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+.waf-theme .waf-combobox2 input {
+  width: -webkit-calc(100% - 2rem);
   width: calc(100% - 2rem);
-  cursor: auto !important;
+  height: 100%;
   float: left;
 }
-.waf-theme.default .waf-combobox2 button {
-  float: right;
-  background-color: transparent;
-  border: 0;
-  text-align: center;
-  position: relative;
-  height: 100%;
+.waf-theme .waf-combobox2 button {
   width: 2rem;
-  cursor: pointer !important;
-  outline: none;
+  height: 100%;
+  float: right;
+  position: relative;
 }
-.waf-theme.default .waf-combobox2 button:before {
+.waf-theme .waf-combobox2 button:before {
   content: '';
   display: block;
   width: 0;
@@ -45,52 +25,625 @@
   left: 50%;
   margin-left: -4px;
 }
-.waf-theme.default .waf-combobox2 .waf-combobox2-part-list {
-  display: none;
-  top: 0;
-  width: 100%;
-  /* width: calc(100% - 2rem); */
-  max-height: 350px;
-  overflow-y: auto;
-  border: 1px solid #999;
+.waf-theme .waf-combobox2 .waf-combobox2-part-list {
+    display: none;
+	position: relative;
+	width: 100%;
+	max-height: 15rem;
+	background: none;
+	background-color: white;
+	border: 1px solid gray;
+    padding: 0.5rem 1rem;
+}
+.waf-theme .waf-combobox2 .waf-combobox2-part-list li {
+	border: none !important;
+}
+
+
+
+
+/* DEFAULT */
+.waf-theme.default .waf-combobox2 {
+  border: 1px solid #999999;
   border-radius: 4px;
-  background-color: #fff;
-  text-shadow: #fff 1px 1px;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUzJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUzJSIgc3RvcC1jb2xvcj0iI2YyZjJmMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmMmYyZjIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgba(255, 255, 255, 0)), color-stop(0.47, rgba(255, 255, 255, 0)), color-stop(0.47, #ffffff), color-stop(1, #ffffff)), url("/walib/WAF/widget/skin/default/png/widget-skin-default-texture.png");
+  background-image: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 47%, #ffffff 47%, #ffffff 100%), url("/walib/WAF/widget/skin/default/png/widget-skin-default-texture.png");
+  background-image: -moz-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 47%, #ffffff 47%, #ffffff 100%), url("/walib/WAF/widget/skin/default/png/widget-skin-default-texture.png");
+  background-image: -ms-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 47%, #ffffff 47%, #ffffff 100%), url("/walib/WAF/widget/skin/default/png/widget-skin-default-texture.png");
+  background-image: -o-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 47%, #ffffff 47%, #ffffff 100%), url("/walib/WAF/widget/skin/default/png/widget-skin-default-texture.png");
+  background-image: linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 47%, #ffffff 47%, #ffffff 100%), url("/walib/WAF/widget/skin/default/png/widget-skin-default-texture.png");
+  box-shadow: inset 0 0 0 1px #ffffff, 1px 1px 3px rgba(0, 0, 0, 0.15);
+  text-shadow: #ffffff 1px 1px;
   color: #1a1818;
   -webkit-font-smoothing: antialiased;
   font-smooth: always;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
 }
-.waf-theme.default .waf-combobox2 .waf-combobox2-part-list li {
-  padding: 0.5rem 1rem;
-  cursor: pointer !important;
-  border: none;
-  line-height: 1.5rem;
-}
-.waf-theme.default .waf-combobox2 .waf-combobox2-part-list li:hover {
-  background-color: #999;
-  color: white;
-  text-shadow: none;
-}
+/* States */
 .waf-theme.default .waf-combobox2.waf-state-hover {
-  border: 1px solid #009fc7;
-  background-image: -webkit-linear-gradient(bottom, #ccfafc 0%, #ccfafc 50%, #ffffff 50%);
-  background-image: linear-gradient(to top, #ccfafc 0%, #ccfafc 50%, #ffffff 50%);
-}
-.waf-theme.default .waf-combobox2.waf-state-hover input {
-  border-right: 1px solid #009fc7;
+  border-color: #009fc7;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2NjZmFmYyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjY2ZhZmMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background-image: -webkit-gradient(linear, left top, left bottom, co-stop(0, #ffffff), color-stop(0.5, #ffffff), color-stop(0.5, #ccfafc), color-stop(1, #ccfafc));
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 50%, #ccfafc 50%, #ccfafc 100%);
+  background-image: -moz-linear-gradient(top, #ffffff 0%, #ffffff 50%, #ccfafc 50%, #ccfafc 100%);
+  background-image: -ms-linear-gradient(top, #ffffff 0%, #ffffff 50%, #ccfafc 50%, #ccfafc 100%);
+  background-image: -o-linear-gradient(top, #ffffff 0%, #ffffff 50%, #ccfafc 50%, #ccfafc 100%);
+  background-image: linear-gradient(top, #ffffff 0%, #ffffff 50%, #ccfafc 50%, #ccfafc 100%);
+  color: #009fc7;
 }
 .waf-theme.default .waf-combobox2.waf-state-active {
-  border: 1px solid #00748c;
-  background-image: -webkit-linear-gradient(bottom, #009fc7 68%, #00748c 100%);
-  background-image: linear-gradient(to top, #009fc7 68%, #00748c 100%);
+  border-color: #00748c;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwNzQ4YyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjMyJSIgc3RvcC1jb2xvcj0iIzAwOWZjNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDlmYzciIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #009fc7), color-stop(0.68, #009fc7), color-stop(1, #00748c));
+  background-image: -webkit-linear-gradient(bottom, #009fc7 0%, #009fc7 68%, #00748c 100%);
+  background-image: -moz-linear-gradient(bottom, #009fc7 0%, #009fc7 68%, #00748c 100%);
+  background-image: -ms-linear-gradient(bottom, #009fc7 0%, #009fc7 68%, #00748c 100%);
+  background-image: -o-linear-gradient(bottom, #009fc7 0%, #009fc7 68%, #00748c 100%);
+  background-image: linear-gradient(bottom, #009fc7 0%, #009fc7 68%, #00748c 100%);
+  box-shadow: none;
+  text-shadow: #4a402c 1px 1px;
+  color: #ffffff;
+}
+.waf-theme.default .waf-combobox2.waf-state-disabled {
+  opacity: 0.4;
+}
+/**
+ * -------------------------------------------------------
+ * @section combobox input
+ * -------------------------------------------------------
+ */
+.waf-theme.default .waf-combobox2 input {
+  padding-left: 10px;
+  border-width: 0;
+  box-shadow: none;
+  font-size: 12px;
+  -webkit-font-smoothing: antialiased;
+  font-smooth: always;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+/**
+ * -------------------------------------------------------
+ * @section combobox button
+ * -------------------------------------------------------
+ */
+.waf-theme.default .waf-combobox2 button {
+  border-width: 0 0 0 1px;
+  border-left-style: solid;
+  background: transparent;
+  box-shadow: inset 1px 0 0 0 #ffffff;
+  border-radius: 0;
+}
+/* States */
+.waf-theme.default .waf-combobox2.waf-state.hover button {
+  border-left-color: #73dce6;
+}
+.waf-theme.default .waf-combobox2.waf-state-active button {
+  border-left-color: transparent;
   box-shadow: none;
 }
-.waf-theme.default .waf-combobox2.waf-state-active input {
-  border-right: 1px solid #00748c;
-  color: white;
+/**
+ * -------------------------------------------------------
+ * @section combobox button icon
+ * -------------------------------------------------------
+ */
+.waf-theme.default .waf-combobox2.waf-state-hover .ui-icon {
+  background-image: url("/walib/WAF/lib/jquery-ui/themes/base/images//ui-icons_009fc7_256x240.png");
+}
+.waf-theme.default .waf-combobox2.waf-state-active .ui-icon {
+  background-image: url("/walib/WAF/lib/jquery-ui/themes/base/images//ui-icons_ffffff_256x240.png");
+}
+/**
+ * -------------------------------------------------------
+ * @section combobox-list
+ * -------------------------------------------------------
+ */
+.waf-theme.default .waf-combobox2-list {
+  padding: 0;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  box-shadow: 2px 2px 9px rgba(66, 55, 40, 0.3);
+  color: #1a1818;
+}
+/**
+ * -----------------------------------
+ * @subsection ui-menu-item
+ * -----------------------------------
+ */
+.waf-theme.default .waf-combobox2-list .ui-menu-item a {
+  border-color: transparent;
+}
+.waf-theme.default .waf-combobox2-list .ui-menu-item a,
+.waf-theme.default .waf-combobox2-list .ui-menu-item a.ui-state-hover {
+  margin: 0;
+  padding: 3px 10px;
+  border-width: 1px 0 1px 0;
+  border-style: solid;
+  border-radius: 0;
+  outline: none;
+}
+.waf-theme.default .waf-combobox2-list .ui-menu-item a {
+  border-color: transparent;
+}
+/* States */
+.waf-theme.default .waf-combobox2-list .ui-menu-item a.ui-state-hover {
+  border-top-color: #b0f2f5;
+  border-bottom-color: #b0f2f5;
+  /* we need to reset the background shortcut for IE */
+  background: none;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2U2ZmVmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjE3JSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjgzJSIgc3RvcC1jb2xvcj0iI2NjZmFmYyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjY2ZhZmMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e6feff), color-stop(0.17, #ffffff), color-stop(0.83, #ccfafc), color-stop(1, #ccfafc));
+  background-image: -webkit-linear-gradient(top, #e6feff 0%, #ffffff 17%, #ccfafc 83%, #ccfafc 100%);
+  background-image: -moz-linear-gradient(top, #e6feff 0%, #ffffff 17%, #ccfafc 83%, #ccfafc 100%);
+  background-image: -ms-linear-gradient(top, #e6feff 0%, #ffffff 17%, #ccfafc 83%, #ccfafc 100%);
+  background-image: -o-linear-gradient(top, #e6feff 0%, #ffffff 17%, #ccfafc 83%, #ccfafc 100%);
+  background-image: linear-gradient(top, #e6feff 0%, #ffffff 17%, #ccfafc 83%, #ccfafc 100%);
+  box-shadow: inset 0 1px 1px #ffffff, inset 0 -1px 1px #ffffff;
+  color: #009fc7;
+}
+
+
+
+/* LILAC */
+/**
+  * -------------------------------------------------------
+  * @section Main
+  * -------------------------------------------------------
+  */
+.waf-theme.lilac .waf-combobox2 {
+  border: 1px solid #777985;
+  border-radius: 4px;
+  background-color: #d9dcf2;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0)));
+  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+  background-image: linear-gradient(top, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 1px 1px 2px rgba(0, 0, 0, 0.15);
+  text-shadow: rgba(255, 255, 255, 0.3) 0 1px;
+  color: #4c4d54;
+  -webkit-transition: background 0.1s;
+  transition: background 0.1s;
+  -webkit-font-smoothing: antialiased;
+  font-smooth: always;
+}
+/* States */
+.waf-theme.lilac .waf-combobox2.waf-state-hover {
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.8)), color-stop(100%, rgba(255, 255, 255, 0.4)));
+  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+  background-image: linear-gradient(top, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+}
+.waf-theme.lilac .waf-combobox2.waf-state-active {
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.8)), color-stop(100%, rgba(255, 255, 255, 0.4)));
+  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+  background-image: linear-gradient(top, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.45) inset, 1px 1px 2px rgba(0, 0, 0, 0.15);
+}
+.waf-theme.lilac .waf-combobox2.waf-state-disabled {
+  opacity: 0.4;
+}
+/**
+ * -------------------------------------------------------
+ * @section combobox input
+ * -------------------------------------------------------
+ */
+.waf-theme.lilac .waf-combobox2 input {
+  padding-left: 10px;
+  border-width: 0;
+  box-shadow: none;
+  font-size: 12px;
+  -webkit-font-smoothing: antialiased;
+  font-smooth: always;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+/**
+ * -------------------------------------------------------
+ * @section combobox button
+ * -------------------------------------------------------
+ */
+.waf-theme.lilac .waf-combobox2 button {
+  border-width: 0 0 0 1px;
+  border-left-style: solid;
+  background: transparent;
+  box-shadow: inset 1px 0 0 0 #ffffff;
+}
+/* States */
+.waf-theme.lilac .waf-combobox2.waf-state.hover button {
+  border-left-color: #73dce6;
+}
+.waf-theme.lilac .waf-combobox2.waf-state-active button {
+  box-shadow: none;
+}
+/**
+ * -------------------------------------------------------
+ * @section combobox button icon
+ * -------------------------------------------------------
+ */
+.waf-theme.lilac .waf-combobox2.waf-state-hover .ui-icon {
+  background-image: url("/walib/WAF/lib/jquery-ui/themes/base/images//ui-icons_009fc7_256x240.png");
+}
+.waf-theme.lilac .waf-combobox2.waf-state-active .ui-icon {
+  background-image: url("/walib/WAF/lib/jquery-ui/themes/base/images//ui-icons_009fc7_256x240.png");
+}
+/**
+ * -------------------------------------------------------
+ * @section combobox-list
+ * -------------------------------------------------------
+ */
+.waf-theme.lilac .waf-combobox2-part-list {
+  /*padding: 0;*/
+  border: 1px solid #cccccc !important;
+  border-radius: 3px !important;
+  box-shadow: 2px 2px 9px rgba(66, 55, 40, 0.3);
+  color: #1a1818;
+  font-size: 12px;
+}
+/**
+ * -----------------------------------
+ * @subsection ui-menu-item
+ * -----------------------------------
+ */
+.waf-theme.lilac .waf-combobox2-part-list .ui-menu-item a {
+  border-color: transparent;
+}
+.waf-theme.lilac .waf-combobox2-part-list .ui-menu-item a,
+.waf-theme.lilac .waf-combobox2-part-list .ui-menu-item a.ui-state-hover {
+  margin: 0;
+  padding: 3px 10px;
+  border-width: 1px 0 1px 0;
+  border-style: solid;
+  border-radius: 0;
+  outline: none;
+}
+.waf-theme.lilac .waf-combobox2-part-list .ui-menu-item a {
+  border-color: transparent;
+}
+/* States */
+.waf-theme.lilac .waf-combobox2-part-list .ui-menu-item a.ui-state-hover {
+  border-top-color: #ff8500;
+  border-bottom-color: #ff8500;
+  /* we need to reset the background shortcut for IE */
+  background: none;
+  background-color: #ffb22a;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.6)), color-stop(100%, rgba(255, 255, 255, 0.2)));
+  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.2) 100%);
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.2) 100%);
+  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.2) 100%);
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.2) 100%);
+  background-image: linear-gradient(top, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.2) 100%);
+  color: #009fc7;
+}
+
+
+/* METAL */
+/**
+ * -------------------------------------------------------
+ * @section Main
+ * -------------------------------------------------------
+ */
+.waf-theme.metal .waf-combobox2 {
+  border-width: 1px;
+  border-style: solid;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUzJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUzJSIgc3RvcC1jb2xvcj0iI2YyZjJmMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmMmYyZjIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgba(255, 255, 255, 0)), color-stop(0.47, rgba(255, 255, 255, 0)), color-stop(0.47, #ffffff), color-stop(1, #ffffff)), url("/walib/WAF/widget/skin/default/png/widget-skin-default-texture.png");
+  background-image: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 47%, #ffffff 47%, #ffffff 100%), url("/walib/WAF/widget/skin/default/png/widget-skin-default-texture.png");
+  background-image: -moz-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 47%, #ffffff 47%, #ffffff 100%), url("/walib/WAF/widget/skin/default/png/widget-skin-default-texture.png");
+  background-image: -ms-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 47%, #ffffff 47%, #ffffff 100%), url("/walib/WAF/widget/skin/default/png/widget-skin-default-texture.png");
+  background-image: -o-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 47%, #ffffff 47%, #ffffff 100%), url("/walib/WAF/widget/skin/default/png/widget-skin-default-texture.png");
+  background-image: linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 47%, #ffffff 47%, #ffffff 100%), url("/walib/WAF/widget/skin/default/png/widget-skin-default-texture.png");
+  border-color: #999999;
+  color: #1a1818;
+  text-shadow: #ffffff 1px 1px;
+}
+/* States */
+.waf-theme.metal .waf-combobox2.waf-state-hover {
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2NjZmFmYyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjY2ZhZmMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background-image: -webkit-gradient(linear, left top, left bottom, co-stop(0, #ffffff), color-stop(0.5, #ffffff), color-stop(0.5, #ccfafc), color-stop(1, #ccfafc));
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 50%, #ccfafc 50%, #ccfafc 100%);
+  background-image: -moz-linear-gradient(top, #ffffff 0%, #ffffff 50%, #ccfafc 50%, #ccfafc 100%);
+  background-image: -ms-linear-gradient(top, #ffffff 0%, #ffffff 50%, #ccfafc 50%, #ccfafc 100%);
+  background-image: -o-linear-gradient(top, #ffffff 0%, #ffffff 50%, #ccfafc 50%, #ccfafc 100%);
+  background-image: linear-gradient(top, #ffffff 0%, #ffffff 50%, #ccfafc 50%, #ccfafc 100%);
+  border-color: #009fc7;
+  color: #009fc7;
+}
+.waf-theme.metal .waf-combobox2.waf-state-active {
+  border-color: #00748c;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwNzQ4YyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjMyJSIgc3RvcC1jb2xvcj0iIzAwOWZjNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDlmYzciIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #009fc7), color-stop(0.68, #009fc7), color-stop(1, #00748c));
+  background-image: -webkit-linear-gradient(bottom, #009fc7 0%, #009fc7 68%, #00748c 100%);
+  background-image: -moz-linear-gradient(bottom, #009fc7 0%, #009fc7 68%, #00748c 100%);
+  background-image: -ms-linear-gradient(bottom, #009fc7 0%, #009fc7 68%, #00748c 100%);
+  background-image: -o-linear-gradient(bottom, #009fc7 0%, #009fc7 68%, #00748c 100%);
+  background-image: linear-gradient(bottom, #009fc7 0%, #009fc7 68%, #00748c 100%);
+  color: #ffffff;
   text-shadow: #4a402c 1px 1px;
 }
-.waf-theme.default .waf-combobox2.waf-state-active button:before {
-  border-top-color: white;
+.waf-theme.metal .waf-combobox2.waf-state-disabled {
+  opacity: 0.4;
+}
+/**
+ * -------------------------------------------------------
+ * @section combobox input
+ * -------------------------------------------------------
+ */
+.waf-theme.metal .waf-combobox2 input {
+  border: 0;
+  padding-left: 10px;
+  box-shadow: none;
+}
+/**
+ * -------------------------------------------------------
+ * @section combobox button
+ * -------------------------------------------------------
+ */
+.waf-theme.metal .waf-combobox2 button {
+  border-width: 0 0 0 1px;
+  border-left-style: solid;
+  background: transparent;
+  box-shadow: none;
+}
+/**
+ * -----------------------------------
+ * @subsubsection combobox button states
+ * -----------------------------------
+ */
+.waf-theme.metal .waf-combobox2.waf-state-hover button {
+  border-left-color: #73dce6;
+}
+.waf-theme.metal .waf-combobox2.waf-state-active button {
+  border-left-color: transparent;
+}
+/**
+ * -------------------------------------------------------
+ * @section combobox-list
+ * -------------------------------------------------------
+ */
+.waf-theme.metal .waf-combobox2-part-list {
+  /*padding: 0;*/
+  border-left-width: 1px !important;
+  border-left-style: solid;
+  -webkit-box-shadow: 2px 2px 3px rgba(96, 74, 41, 0.3);
+  border-color: #cccccc;
+  box-shadow: 2px 2px 9px rgba(66, 55, 40, 0.3);
+  color: #1a1818;
+}
+.waf-theme.metal .waf-combobox2-part-list.ui-corner-all {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+}
+/**
+ * -----------------------------------
+ * @subsection ui-menu-item
+ * -----------------------------------
+ */
+.waf-theme.metal .waf-combobox2-part-list .ui-menu-item a,
+.waf-theme.metal .waf-combobox2-part-list .ui-menu-item a.ui-state-hover {
+  margin: 0;
+  padding: 3px 10px;
+  border-width: 1px 0 1px 0;
+  border-style: solid;
+  border-color: transparent;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+  outline: none;
+}
+/**
+ * -----------------------------------
+ * @subsubsection combobox ui-menu-item states
+ * -----------------------------------
+ */
+.waf-theme.metal .waf-combobox2-part-list .ui-menu-item a.ui-state-hover {
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(255, 255, 255, 0.48)), color-stop(0.17, #ffffff), color-stop(0.83, rgba(255, 255, 255, 0)), color-stop(1, rgba(255, 255, 255, 0)));
+  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.48) 0%, #ffffff 17%, rgba(255, 255, 255, 0) 83%, rgba(255, 255, 255, 0) 100%);
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.48) 0%, #ffffff 17%, rgba(255, 255, 255, 0) 83%, rgba(255, 255, 255, 0) 100%);
+  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.48) 0%, #ffffff 17%, rgba(255, 255, 255, 0) 83%, rgba(255, 255, 255, 0) 100%);
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.48) 0%, #ffffff 17%, rgba(255, 255, 255, 0) 83%, rgba(255, 255, 255, 0) 100%);
+  background-image: linear-gradient(top, rgba(255, 255, 255, 0.48) 0%, #ffffff 17%, rgba(255, 255, 255, 0) 83%, rgba(255, 255, 255, 0) 100%);
+  border-top-color: #b0f2f5;
+  border-bottom-color: #b0f2f5;
+  /* we need to reset the background shortcut for IE */
+  background: none;
+  /*background-color: rgb(204, 250, 252);*/
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2U2ZmVmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjE3JSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjgzJSIgc3RvcC1jb2xvcj0iI2NjZmFmYyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjY2ZhZmMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e6feff), color-stop(0.17, #ffffff), color-stop(0.83, #ccfafc), color-stop(1, #ccfafc));
+  background-image: -webkit-linear-gradient(top, #e6feff 0%, #ffffff 17%, #ccfafc 83%, #ccfafc 100%);
+  background-image: -moz-linear-gradient(top, #e6feff 0%, #ffffff 17%, #ccfafc 83%, #ccfafc 100%);
+  background-image: -ms-linear-gradient(top, #e6feff 0%, #ffffff 17%, #ccfafc 83%, #ccfafc 100%);
+  background-image: -o-linear-gradient(top, #e6feff 0%, #ffffff 17%, #ccfafc 83%, #ccfafc 100%);
+  background-image: linear-gradient(top, #e6feff 0%, #ffffff 17%, #ccfafc 83%, #ccfafc 100%);
+  box-shadow: inset 0 1px 1px #ffffff, inset 0 -1px 1px #ffffff;
+  color: #009fc7;
+}
+
+
+/* LIGHT */
+.waf-theme.light .waf-combobox2 {
+  border: 1px solid #999999;
+  border-radius: 10px;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUzJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUzJSIgc3RvcC1jb2xvcj0iI2YyZjJmMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmMmYyZjIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgba(255, 255, 255, 0)), color-stop(0.47, rgba(255, 255, 255, 0)), color-stop(0.47, #ffffff), color-stop(1, #ffffff)), url("/walib/WAF/widget/skin/default/png/widget-skin-default-texture.png");
+  background-image: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 47%, #ffffff 47%, #ffffff 100%), url("/walib/WAF/widget/skin/default/png/widget-skin-default-texture.png");
+  background-image: linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 47%, #ffffff 47%, #ffffff 100%), url("/walib/WAF/widget/skin/default/png/widget-skin-default-texture.png");
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  color: #1a1818;
+  text-shadow: #ffffff 1px 1px;
+}
+/* States */
+.waf-theme.light .waf-combobox2.waf-state-hover {
+  border-color: #009fc7;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2NjZmFmYyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjY2ZhZmMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background-image: -webkit-gradient(linear, left top, left bottom, co-stop(0, #ffffff), color-stop(0.5, #ffffff), color-stop(0.5, #ccfafc), color-stop(1, #ccfafc));
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 50%, #ccfafc 50%, #ccfafc 100%);
+  background-image: linear-gradient(top, #ffffff 0%, #ffffff 50%, #ccfafc 50%, #ccfafc 100%);
+  color: #009fc7;
+}
+.waf-theme.light .waf-combobox2.waf-state-active {
+  border-color: #00748c;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwNzQ4YyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjMyJSIgc3RvcC1jb2xvcj0iIzAwOWZjNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDlmYzciIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #009fc7), color-stop(0.68, #009fc7), color-stop(1, #00748c));
+  background-image: -webkit-linear-gradient(bottom, #009fc7 0%, #009fc7 68%, #00748c 100%);
+  background-image: linear-gradient(bottom, #009fc7 0%, #009fc7 68%, #00748c 100%);
+  color: #ffffff;
+  text-shadow: #4a402c 1px 1px;
+}
+.waf-theme.light .waf-combobox2.waf-state-disabled {
+  opacity: 0.4;
+}
+
+/**
+ * -------------------------------------------------------
+ * @section combobox input
+ * -------------------------------------------------------
+ */
+.waf-theme.light .waf-combobox2 input {
+  border: 0;
+  padding-left: 10px;
+  box-shadow: none;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+/**
+ * -------------------------------------------------------
+ * @section combobox button
+ * -------------------------------------------------------
+ */
+.waf-theme.light .waf-combobox2 button {
+  border-width: 0 0 0 1px;
+  border-left-style: solid;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background: transparent;
+}
+/* States */
+.waf-theme.light .waf-combobox2.waf-state-hover button {
+  border-left-color: #73dce6;
+}
+.waf-theme.light .waf-combobox2.waf-state-active button {
+  border-left-color: transparent;
+}
+/**
+ * -------------------------------------------------------
+ * @section combobox-list
+ * -------------------------------------------------------
+ */
+.waf-theme.light .waf-combobox2-part-list {
+  /*padding: 0;*/
+  border-radius: 10px !important;
+  border-left-width: 1px;
+  border-left-style: solid;
+  border-color: #cccccc;
+  box-shadow: 2px 2px 9px rgba(66, 55, 40, 0.3);
+  color: #1a1818;
+}
+/**
+ * -----------------------------------
+ * @subsection ui-menu-item
+ * -----------------------------------
+ */
+.waf-theme.light .waf-combobox2-part-list .ui-menu-item a,
+.waf-theme.light .waf-combobox2-part-list .ui-menu-item a.ui-state-hover {
+  margin: 0;
+  padding: 3px 10px;
+  background-image: none;
+  border-width: 1px 0 1px 0;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 0;
+  outline: none;
+}
+.waf-theme.light .waf-combobox2-part-list .ui-menu-item a.ui-state-hover {
+  border-top-color: #b0f2f5;
+  border-bottom-color: #b0f2f5;
+  /* we need to reset the background shortcut for IE */
+  background: none;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2U2ZmVmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjE3JSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjgzJSIgc3RvcC1jb2xvcj0iI2NjZmFmYyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjY2ZhZmMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e6feff), color-stop(0.17, #ffffff), color-stop(0.83, #ccfafc), color-stop(1, #ccfafc));
+  background-image: -webkit-linear-gradient(top, #e6feff 0%, #ffffff 17%, #ccfafc 83%, #ccfafc 100%);
+  background-image: linear-gradient(top, #e6feff 0%, #ffffff 17%, #ccfafc 83%, #ccfafc 100%);
+  box-shadow: inset 0 1px 1px #ffffff, inset 0 -1px 1px #ffffff;
+  color: #009fc7;
+}
+.waf-theme.light .waf-combobox2-part-list .ui-menu-item:first-of-type a {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.waf-theme.light .waf-combobox2-part-list .ui-menu-item:last-of-type a {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+
+/* SOFT GRAY */
+.waf-theme.softGray .waf-combobox2 {
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #faf9fb), color-stop(1, #e3e3eb));
+  background-image: -webkit-linear-gradient(top, #faf9fb 0%, #e3e3eb 100%);
+  background-image: linear-gradient(top, #faf9fb 0%, #e3e3eb 100%);
+}
+/* States */
+.waf-theme.softGray .waf-combobox2.waf-state-hover {
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fcfcfc), color-stop(1, #ececec));
+  background-image: -webkit-linear-gradient(top, #fcfcfc 0%, #ececec 100%);
+  background-image: linear-gradient(top, #fcfcfc 0%, #ececec 100%);
+}
+.waf-theme.softGray .waf-combobox2.waf-state-disabled {
+  opacity: 0.5;
+}
+/**
+ * -------------------------------------------------------
+ * @section Input
+ * -------------------------------------------------------
+ */
+.waf-theme.softGray .waf-combobox2 input {
+  padding: 0 4px;
+  border-width: 0 1px 0 0;
+  border-style: solid;
+  border-color: #cccccc;
+  color: #666666;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.waf-theme.softGray .waf-combobox2.waf-state-active {
+  border-color: #838384;
+}
+.waf-theme.softGray .waf-combobox2.waf-state-active input {
+  background: white;
+}
+/**
+ * -------------------------------------------------------
+ * @section Button
+ * -------------------------------------------------------
+ */
+.waf-theme.softGray .waf-combobox2 button {
+  border-width: 0 0 0 1px;
+  border-style: solid;
+  border-color: #ffffff;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #faf9fb), color-stop(1, #e3e3eb));
+  background-image: -webkit-linear-gradient(top, #faf9fb 0%, #e3e3eb 100%);
+  background-image: linear-gradient(top, #faf9fb 0%, #e3e3eb 100%);
+}
+/* States */
+.waf-theme.softGray .waf-combobox2.waf-state-hover button {
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fcfcfc), color-stop(1, #ececec));
+  background-image: -webkit-linear-gradient(top, #fcfcfc 0%, #ececec 100%);
+  background-image: linear-gradient(top, #fcfcfc 0%, #ececec 100%);
+}
+.waf-theme.softGray .waf-combobox2.waf-state-active button {
+  border-color: transparent;
 }
