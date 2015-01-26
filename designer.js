@@ -72,7 +72,8 @@
         window.setTimeout(function() {
             var input = this.getPart('input');
             var button = this.getPart('button');
-            $(input.node).width($(this.node).innerWidth() - $(button.node).width());
+            var buttonBorderWidth = parseInt($(button.node).css('border-left-width') || 0, 10) - parseInt($(button.node).css('border-right-width') || 0, 10);
+            $(input.node).width($(this.node).width() - $(button.node).width() - buttonBorderWidth);
         }.bind(this), 0);
     }
     ComboBox.studioOnResize(_resizeInput);
