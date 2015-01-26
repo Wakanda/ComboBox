@@ -245,10 +245,14 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
             this._syncDupDsElementChangeSubscriber.pause();
             boundDatasource.datasource.filterQuery(queryString, {
                 onSuccess: function(e) {
-                    this._openList();
-                    this._dupDsElementChangeSubscriber.resume();
-                    this._dupDsElementChangeSetBindSubscriber.resume();
-                    this._syncDupDsElementChangeSubscriber.resume();
+                    var options = {};
+                    options.onSuccess = options.onError = function(e) {
+                        this._openList();
+                        this._dupDsElementChangeSubscriber.resume();
+                        this._dupDsElementChangeSetBindSubscriber.resume();
+                        this._syncDupDsElementChangeSubscriber.resume();
+                    }.bind(this);
+                    collection.select(-1, options);
                 }.bind(this),
                 onError: function(e) {
                     console.error(e);
