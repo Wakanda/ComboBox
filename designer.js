@@ -6,7 +6,7 @@
 
     ComboBox.addLabel();
 
-    ComboBox.customizeProperty('synchroize', {
+    ComboBox.customizeProperty('synchronize', {
         title: 'Synchronize',
         description: 'Synchronize with Choices'
     });
@@ -21,7 +21,7 @@
 
         // synchrinized
         function _synchronizedHandler() {
-            if(this.synchroize()) {
+            if(this.synchronize()) {
                 this.value.hide();
                 this.value.old = this.value();
                 this.value(null);
@@ -30,7 +30,7 @@
                 this.value(this.value.old);
             }
         }
-        this.synchroize.onChange(_synchronizedHandler.bind(this));
+        this.synchronize.onChange(_synchronizedHandler.bind(this));
         _synchronizedHandler.call(this);
 
         // autocomplete
@@ -80,20 +80,20 @@
 
     // add events
     ComboBox.addEvents([{
-        'name': 'notFound',
-        'description': 'Not Found',
+        'name': 'valueNotFound',
+        'description': 'On Value Not Found',
         'category': 'Property Events'
     }, {
-        'name': 'doublonFound',
-        'description': 'Doublon Found',
+        'name': 'duplicateFound',
+        'description': 'On Duplicate Found',
         'category': 'Property Events'
     }, {
-         'name': 'open',
-        'description': 'List Opened',
+         'name': 'openedList',
+        'description': 'On Opened List',
         'category': 'Property Events'
     }, {
-         'name': 'close',
-        'description': 'List Closed',
+         'name': 'closedList',
+        'description': 'On Closed List',
         'category': 'Property Events'
     }]);
 });

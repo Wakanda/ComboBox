@@ -4,7 +4,7 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
     var ComboBox = widget.create('ComboBox', {
         tagName: 'div',
         value: widget.property(),
-        synchroize: widget.property({ type: 'boolean', bindable: false }),
+        synchronize: widget.property({ type: 'boolean', bindable: false }),
         autoComplete: widget.property({ type: 'boolean', bindable: false, defaultValue: true }),
         filter: widget.property({
             type: 'enum',
@@ -80,7 +80,7 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
                 return;
 
             function _pauseOrResume(bool) {
-                if(that.synchroize()) {
+                if(that.synchronize()) {
                     that._syncDupDsElementChangeSubscriber[bool ? 'pause' : 'resume']();
                     that._syncBoundDsElementChangeSubscriber[bool ? 'pause' : 'resume']();
                 } else {
@@ -95,7 +95,7 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
                 onSuccess: function(e) {
                     var opt = {};
                     opt.onSuccess = opt.onError = function(e) { _pauseOrResume(false); };
-                    if(that.synchroize()) {
+                    if(that.synchronize()) {
                         that._synchronizeDupDsPosition(opt);
                     } else {
                         var boundValueDatasource = this.value.boundDatasource();
@@ -138,7 +138,7 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
 
                 this._syncDupDsElementChangeSubscriber = collection.subscribe('currentElementChange', function(e) {
                     // synchronize with origin datasource
-                    if(this.synchroize()) {
+                    if(this.synchronize()) {
                         if(collection.length &&  boundDatasource.datasource.length && collection.getPosition() != boundDatasource.datasource.getPosition()) {
                             that._syncBoundDsElementChangeSubscriber.pause();
                             var options = {};
@@ -149,14 +149,14 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
                 }.bind(this));
 
                 this._dupDsElementChangeSetBindSubscriber = collection.subscribe('currentElementChange', function(e) {
-                    if(! this.synchroize()) {
+                    if(! this.synchronize()) {
                         var value = collection.getAttributeValue(mapping.value);
                         this._setBindValue(value);
                     }
                 }.bind(this));
 
                 // update selected after bind value change
-                if(! this.synchroize() && boundValueDatasource && boundValueDatasource.datasource && boundDatasource) {
+                if(! this.synchronize() && boundValueDatasource && boundValueDatasource.datasource && boundDatasource) {
                     this._boundValueDsElementChangeSubscriber = boundValueDatasource.datasource.subscribe('currentElementChange', function(e) {
                         var value = boundValueDatasource.datasource.getAttributeValue(boundValueDatasource.attribute);
                         this._dupDsElementChangeSetBindSubscriber.pause();
@@ -167,7 +167,7 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
                 }
 
                 this._syncBoundDsElementChangeSubscriber = boundDatasource.datasource.subscribe('currentElementChange', function(e) {
-                    if(that.synchroize()) {
+                    if(that.synchronize()) {
                         if(boundDatasource.datasource.length &&  collection.length && boundDatasource.datasource.getPosition() != collection.getPosition()) {
                             that._syncDupDsElementChangeSubscriber.pause();
                             var options = {};
@@ -243,6 +243,7 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
             this._dupDsElementChangeSubscriber.pause();
             this._dupDsElementChangeSetBindSubscriber.pause();
             this._syncDupDsElementChangeSubscriber.pause();
+            console.warn('> queryString : ', queryString, ', value : ', value);
             boundDatasource.datasource.filterQuery(queryString, {
                 onSuccess: function(e) {
                     var options = {};
@@ -325,7 +326,7 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
             var bound = this.value.boundDatasource();
             var collection = this.getPart('list').collection();
             var mapping = this._getItemsMapping();
-            if(this.synchroize() || ! bound) return;
+            if(this.synchronize() || ! bound) return;
 
             var boundAttribute = bound.datasource.getAttribute(bound.attribute);
             if(boundAttribute.kind === 'relatedEntity') {
@@ -349,7 +350,7 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
             if(this._isListOpen()) {
                 $(this.node).css('z-index', this._lastzIndex);
                 this.getPart('list').hide();
-                this.fire('close');
+                this.fire('closedList');
             }
         },
         _openList: function() {
@@ -357,7 +358,7 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
                 this._lastzIndex = $(this.node).css('z-index');
                 $(this.node).css('z-index', 9999999);
                 this.getPart('list').show();
-                this.fire('open');
+                this.fire('openedList');
             }
         },
         _isListOpen: function() {
@@ -377,16 +378,16 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
                         filterQuery: filterQuery,
                         retainPositions: true,
                         onSuccess: function(e) {
-                            console.info('> filterQuery : ' + filterQuery + ' id : ' + that.id);
+                            //console.info('> filterQuery : ' + filterQuery + ' id : ' + that.id);
                             var position = e.result.length ? e.result[0].__POSITION : -1;
                             var length = e.result.length;
                             var options = {
                                 onSuccess: function(evt) {
                                     that.getPart('input').value(collection.getAttributeValue(mapping.display));
                                     if(length === 0)
-                                        that.fire('notFound')
+                                        that.fire('valueNotFound')
                                     else if(length > 1)
-                                        that.fire('doublonFound');
+                                        that.fire('duplicateFound');
                                     else
                                         that.fire('changed');
 
