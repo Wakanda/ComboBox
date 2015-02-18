@@ -82,18 +82,18 @@
     ComboBox.addEvents([{
         'name': 'valueNotFound',
         'description': 'On Value Not Found',
-        'category': 'Property Events'
+        'category': 'Combo Box Events'
     }, {
         'name': 'duplicateFound',
         'description': 'On Duplicate Found',
-        'category': 'Property Events'
+        'category': 'Combo Box Events'
     }, {
          'name': 'openedList',
         'description': 'On Opened List',
-        'category': 'Property Events'
+        'category': 'Combo Box Events'
     }, {
          'name': 'closedList',
         'description': 'On Closed List',
-        'category': 'Property Events'
+        'category': 'Combo Box Events'
     }]);
 });
