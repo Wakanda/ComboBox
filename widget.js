@@ -266,6 +266,9 @@ WAF.define('ComboBox', ['waf-core/widget', 'TextInput', 'Button', 'wListView'], 
             var button = this.getPart('button');
             button.show();
 
+            // clear the default title
+            button.title(' ');
+
             $(button.node).on('click', function(e) {
                 if(this._isListOpen())
                     this._closeList();
